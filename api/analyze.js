@@ -56,7 +56,7 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: "No image uploaded" });
         }
 
-        const buffer = fs.readFileSync(image.filepath);
+        const buffer = await fs.readFile(image.filepath);
 
 
 
