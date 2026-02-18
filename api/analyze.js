@@ -4,6 +4,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default async function handler(req, res) {
 
+    res.setHeader("Access-Control-Allow-Origin", "*"); // or your frontend URL
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
     if (req.method != "POST") {
         return res.status(405).json({ error: "Only Post Requests are Allowed" });
     }
