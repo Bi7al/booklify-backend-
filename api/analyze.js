@@ -10,18 +10,7 @@ export default async function handler(req, res) {
 
 
 
-    const prompt = `Analyze the Image and recommend books based on the interests enclosed in """. Recommend the top 3 books based on these interests. If the Books dont match the interests or if the image does not contain any book titles reply : No Relevent Interests Found.   
-    """${interests}"""
-    The Output should be in the JSON format:
-    [{
-        title:"Book Title",
-        description:"Short Description of the Book"
-    }]
-    
-    Return ONLY valid JSON.
-    Do not include markdown.
-    Do not include explanation text.
-        `
+
 
 
 
@@ -47,6 +36,20 @@ export default async function handler(req, res) {
 
         const image = files.uploadedImage?.[0];
         const interests = fields.interests?.[0];
+
+
+        const prompt = `Analyze the Image and recommend books based on the interests enclosed in """. Recommend the top 3 books based on these interests. If the Books dont match the interests or if the image does not contain any book titles reply : No Relevent Interests Found.   
+    """${interests}"""
+    The Output should be in the JSON format:
+    [{
+        title:"Book Title",
+        description:"Short Description of the Book"
+    }]
+    
+    Return ONLY valid JSON.
+    Do not include markdown.
+    Do not include explanation text.
+        `
 
         if (!image) {
             return res.status(400).json({ error: "No image uploaded" });
