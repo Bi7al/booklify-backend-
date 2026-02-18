@@ -11,6 +11,9 @@ export default async function handler(req, res) {
     try {
         const formData = await req.formData()
         const image = formData.get("uploadedImage");
+        if (!image) {
+            return res.status(400).json({ error: "No image uploaded" });
+        }
         const interests = formData.get("interests");
 
         const prompt = `Analyze the Image and recommend books based on the interests enclosed in """. Recommend the top 3 books based on these interests. If the Books dont match the interests or if the image does not contain any book titles reply : No Relevent Interests Found.
