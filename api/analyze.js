@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
         const image = files.uploadedImage?.[0];
         const interests = fields.interests?.[0];
-
+        const mimeType = image.mimetype || image.type || "image/jpeg";
 
         const prompt = `Analyze the Image and recommend books based on the interests enclosed in """. Recommend the top 3 books based on these interests. If the Books dont match the interests or if the image does not contain any book titles reply : No Relevent Interests Found.   
     """${interests}"""
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
             prompt,
             {
                 inlineData: {
-                    mimeType: image.type,
+                    mimeType: mimeType,
                     data: buffer.toString("base64"),
                 },
             },
